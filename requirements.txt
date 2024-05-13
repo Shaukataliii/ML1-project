@@ -1,3 +1,9 @@
 pandas
 numpy
--e .
+scikit-learn
+exception
+seaborn
+matplotlib
+pandas
+dill
+# -e .

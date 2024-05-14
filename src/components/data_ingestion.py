@@ -3,6 +3,7 @@ import os, sys
 from src.logger import logging
 from src.exception import CustomException
 from src.components import data_transformation
+from src.components import model_trainer
 
 import pandas as pd
 from dataclasses import dataclass
@@ -58,8 +59,12 @@ class DataSplittion:
 
 
 # testing
-# if __name__=="__main__":
-#     data_splittion_obj=DataSplittion()
-#     train_df_path, test_df_path=data_splittion_obj.initiate_data_saving()
-#     data_transformation=data_transformation.DataTransformer()
-#     data_transformation.initialize_data_transformation(train_df_path,test_df_path)
+if __name__=="__main__":
+    data_splittion_obj=DataSplittion()
+    train_df_path, test_df_path=data_splittion_obj.initiate_data_saving()
+
+    data_transformation=data_transformation.DataTransformer()
+    train_processed, test_processed, _ = data_transformation.initialize_data_transformation(train_df_path,test_df_path)
+
+    model_trainer=model_trainer.ModelTrainer()
+    model_trainer.initialize_training(train_df_transformed=train_processed, test_df_transformed=test_processed)

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import save_preprocessor_obj
+from src.utils import save_object
 
 import pandas as pd
 import numpy as np
@@ -58,7 +58,7 @@ class DataTransformer:
             )
 
             # logging
-            logging.info(f"Pre-processor prepared. Cat_feats: {self.transformation_config.cat_feats} and num_feats: {self.transformation_config.cat_feats}")
+            logging.info(f"Pre-processor prepared. Cat_feats: {self.transformation_config.cat_feats} and num_feats: {self.transformation_config.num_feats}")
 
             return pre_processor
         
@@ -97,13 +97,10 @@ class DataTransformer:
             logging.info("Transformed/processed the train and test datasets successfully. Saving the pre-processor and returning processed train and test datasets.")
 
             # saving the pro-processor
-            save_preprocessor_obj(
-                preprocessor_filepath=self.transformation_config.preprocessor_obj_path,
-                preprocessor_obj=preprocessor
+            save_object(
+                filepath=self.transformation_config.preprocessor_obj_path,
+                object=preprocessor
             )
-
-            # logging
-            logging.info(f"Saved the preprocessor. Path: {self.transformation_config.preprocessor_obj_path}")
 
             return (
                 train_df_processed,

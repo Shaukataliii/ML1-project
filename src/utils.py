@@ -33,6 +33,20 @@ def save_object(filepath, object):
         raise CustomException(e, sys)
 
 
+def load_object(filepath):
+    """
+    Requires object filepath, loads it using pickle and returns it.
+    """
+    try:
+        with open(filepath, "rb") as file:
+            object=pickle.load(file)
+
+            return object
+
+    except Exception as e:
+        raise CustomException(e, sys)
+
+
 def train_evaluate_models(x_train, x_test, y_train, y_test, models: dict):
     """
     Requires transformed x_train, x_test, y_train, y_test, models: dict (containing modelname along with its object), trains the models, evaluate them and return the name of the best model. Raises exceptions when things are not right.
